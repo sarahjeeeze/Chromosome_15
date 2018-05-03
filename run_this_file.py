@@ -12,13 +12,14 @@ end = 4300
 
 parsedSequence = BL.ParseSequence(new)
 codingRegion = BL.codingRegion(start,end,parsedSequence)
-listOfIntrons = BL.intronsOnly(codingRegion)
-concatinatedIntrons = BL.intronsStuckTogether(listOfIntrons)
-mrnaSequence = BL.translate(concatinatedIntrons)
+mrnaSequence = BL.translate(codingRegion)
 splitSequence = BL.CodonSequence(mrnaSequence)
-translatedAndAligned = BL.alignseq(splitSequence) #check this
+translatedAndAligned = BL.alignseq(splitSequence)
+justAminoAcids = BL.translatedSequence(splitSequence)#check this
 codonFrequency = BL.codonFreq(splitSequence)# need to edit to incorporate total frequencies
 restrictionEnzymeCutSites = BL.restrictionEnzyme('ttgtc', start, end, parsedSequence) #returned as dictionary
+
+
 
 
 
