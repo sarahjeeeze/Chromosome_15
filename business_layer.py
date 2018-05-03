@@ -27,6 +27,7 @@ Revision History:
 =================
 V1.0 24.03.2018     Original    BY: Sarah Griffiths
 V2.0 17.04.2018     Re-Work 	BY:Sarah Griffiths
+v2.1 03.05.2018	    Fixed a bug	BY: Sarah Griffiths
 """
 #***********************************************************
 #import libraries
@@ -99,8 +100,8 @@ class BasicDBExtraction(object):
 
 def ParseSequence(origin):
     """ Parse the origin sequence returned from chromomse15_DB
-    Input:  origin     --- string returned by pymysql in back end on request from front end"
-    Return: sequence   --- parsed origin with only nucleic acid sequence
+    Input:  origin     --- string returned by pymysql in back end 'origin' is name of sequence in genbank file"
+    Return: sequence   --- parsed origin so now is just nucleic acid sequence
     24.03.2018         By: SG
 	17.04.2018		By:SG
     """
@@ -125,6 +126,7 @@ def codingRegion(start,end,sequence):
     """
     count = 0
     gene = ''
+    start -= 1
     for nucleotide in sequence:
       if count >= start and count <=end:
         gene += nucleotide
@@ -133,30 +135,6 @@ def codingRegion(start,end,sequence):
         count += 1
     return (gene)
 
-def intronsOnly(intronexon):
-
-    """ Return only the introns using regular expressions with start and stop codons
-    Input : intronexon          --- the entire gene
-    Return: [introns]           --- a list of strings containing just the intron sequences
-    24.03.2018         By: SG
-    """
-    import re
-    pattern = re.compile(r'atg.+?taa|atg.+?tag|atg.+?tga')
-    introns = pattern.findall(intronexon)
-    return (introns)
-
-def intronsStuckTogether(introns):
-    """ Sticks introns together in to just sequence of coding codons
-    Input: List of introns      ---from introns function
-    Return: Sequence            --- one string containing CDS codons only - also translated in to mrna
-    """
-
-    CDS = ''
-    for item in introns:
-        CDS += item
-        codon_length = 3
-        CDS = CDS.replace('t', 'u')
-    return (CDS)
 
 def translate(code):
     """
@@ -172,7 +150,7 @@ def CodonSequence(rna):
     """
     translate RNA sequence in to Amino acid sequence
     Input:  rna  --- mrna string
-    Return: aaseq --- Amino acid sequence
+    Return: codon_sequence --- nucleic acids split in to 3's for amino acid sequence
     24.03.2018 By: SG
     """
 
@@ -181,7 +159,42 @@ def CodonSequence(rna):
     codon_sequence = [rna[i:i + length] for i in range(0, len(rna), length)]
 
     return (codon_sequence)
+# for a test
+def translatedSequence(codon_sequence):
+      """ A test to check translation of sequence is the same as CDS in records #ammend once DB layer done
+      Input: codon_sequence
+      Return: Amino acid sequence as a stringand 'Match or not match'"""
 
+      codons = {"uuu": "F", "uuc": "F", "uua": "L", "uug": "L",
+              "ucu": "S", "ucc": "S", "uca": "S", "ucg": "S",
+              "uau": "Y", "uac": "Y", "uaa": "STOP", "uag": "STOP",
+              "ugu": "C", "ugc": "C", "uga": "STOP", "ugg": "W",
+              "cuu": "L", "cuc": "L", "cua": "L", "cug": "L",
+              "ccu": "P", "ccc": "P", "cca": "P", "ccg": "P",
+              "cau": "H", "cac": "H", "caa": "Q", "cag": "Q",
+              "cgu": "R", "cgc": "R", "cga": "R", "cgg": "R",
+              "auu": "I", "auc": "I", "aua": "I", "aug": "M",
+              "acu": "T", "acc": "T", "aca": "T", "acg": "T",
+              "aau": "N", "aac": "N", "aaa": "K", "aag": "K",
+              "agu": "S", "agc": "S", "aga": "R", "agg": "R",
+              "guu": "V", "guc": "V", "gua": "V", "gug": "V",
+              "gcu": "A", "gcc": "A", "gca": "A", "gcg": "A",
+              "gau": "D", "gac": "D", "gaa": "E", "gag": "E",
+              "ggu": "G", "ggc": "G", "gga": "G", "ggg": "G", }
+      aminoacidSequence = ''
+
+      for i in (codon_sequence):
+            if i in codons:
+                  aminoacidSequence += codons[i]
+            else:
+                  aminoacidSequence += '?'
+      return(aminoacidSequence)            
+            
+
+      
+
+      
+      
 
 def alignseq(aminoacid):
 
@@ -247,16 +260,16 @@ def codonFreq(nuc_sequence):
               "gau": "D", "gac": "D", "gaa": "E", "gag": "E",
               "ggu": "G", "ggc": "G", "gga": "G", "ggg": "G", }
 
-    freq = {}
+    codonfrequency = {}
     for codon in nuc_sequence:
-        if codon in freq:
-                freq[codon] += 1
+        if codon in codonfrequency:
+                codonfrequency[codon] += 1
         else:
-                freq[codon] = 1
+                codonfrequency[codon] = 1
         for i in codons:
-            if i not in freq:
+            if i not in codonfrequency:
                 freq[i] = 0
-    return (freq)
+    return (freq) 
 
 
 def totalCodonFreq(seq):
