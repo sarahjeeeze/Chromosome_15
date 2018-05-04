@@ -3,9 +3,9 @@
 
 """
 Program:        chromosome15_gene_browser
-File:           chromome15_middle_layer.py
-Version:        V1.0
-Date:           24.03.2018
+File:           buseinss_layer.py
+Version:        V2.1
+Date:           03.05.2018
 Function:       Obtain data from Chromosome15 DB, process and return output in JSON format.
 Copyright:                  Sarah Griffiths
 Author:                     Sarah Griffiths
@@ -100,10 +100,10 @@ class BasicDBExtraction(object):
 
 def ParseSequence(origin):
     """ Parse the origin sequence returned from chromomse15_DB
-    Input:  origin     --- string returned by pymysql in back end 'origin' is name of sequence in genbank file"
-    Return: sequence   --- parsed origin so now is just nucleic acid sequence
+    Input:  origin     --- string returned by pymysql in back end 'origin' is name of sequence in genbank file
+    Return: sequence   --- parsed origin so now this is just nucleic acid sequence
     24.03.2018         By: SG
-	17.04.2018		By:SG
+    17.04.2018		By:SG
     """
     count = 0
     sequence = ''
