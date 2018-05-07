@@ -28,7 +28,7 @@ Revision History:
 =================
 V1.0 17.04.2018     Original    BY: Sarah Griffiths
 v2.0 28.04.2018     Original    BY: Sarah Griffiths
-v3.0
+v3.0 07.05.2018     Include data access layers BY:SG
 """
 
 import Chrom_CDS_15 Access Layer as DB
