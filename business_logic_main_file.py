@@ -84,7 +84,7 @@ def getAllEntryData(key):
 
     #processing data with functions create in business_logic_layer.py 
 
-    parsedSequence = BL.ParseSequence(new)
+    parsedSequence = BL.ParseSequence(sequence)
     codingRegion = BL.codingRegion(start,end,parsedSequence)
     mrnaSequence = BL.translate(codingRegion)
     splitSequence = BL.CodonSequence(mrnaSequence)
