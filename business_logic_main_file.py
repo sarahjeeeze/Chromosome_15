@@ -28,13 +28,61 @@ Revision History:
 =================
 V1.0 17.04.2018     Original    BY: Sarah Griffiths
 v2.0 28.04.2018     Original    BY: Sarah Griffiths
+v3.0
 """
-#import business_logic
-#import archanapymysql as DB
 
-def getAllEntryData(key):
+import Chrom_CDS_15 Access Layer as DB
+import businessLocic as BL
 
-    XYZ to retrieve the data. 
+def getAllGenes():
+    """ accesses DB and returns list of all genes A-Z """
+    
+    gene_list = gene_list #assigning varibale as functions require an argument
+    geneList =DB.RetriveData.AcessGeneList(gene_list)
+    return(geneList)
+
+def getAllProteins():
+    """ accesses DB and returns list of all proteins A-Z """
+     ProteinProductName_list = ProteinProductName_list
+     proteinList =DB.RetriveData.ProductNameList(ProteinProductName_list)
+     return (proteinList)
+
+def getAllAccessions():
+    """ accesses DB and returns list of all Accessions A-Z """
+     accessionNo_list = accessionNo_List
+     accessionsList =DB.RetriveData.AccessionNumberList(accessionNo_list)
+     return (accessionList)
+
+def getAllChromosomeLocations():
+    """ accesses DB and returns list of all chromosome locations """
+    Chrom_Loc_List = Chrom_Loc_List
+    chromosomeLocationList= DB.RetriveData.AccessChromLocList(Chrom_Loc_List)
+    return (chromosomeLocationList)
+def getAllEntryData(key): 
+    """ returns all data for a particular record
+    input: key --- genename/accession/protein name/chromsome location
+    output accession_number, NCBI_identifier, chromosome_location, protein_product_name
+           parsedSequence, codingRegion, mrnaSequence, splitSequence, translatedAndAligned,
+           justAminoAcids, codonFrequency, RestrictionEnzymes
+           --- see user guide for description of each """
+    # access gene DB layer and return variables
+    basicInfo = DB.RetriveData.AccessGeneData(key)
+    locals().update(basicInfo)
+
+    return (accession_number)
+    return(NCBI_identifier)
+    return (chromosome_location)
+    return (protein_product_name)
+    
+    sequenceInfo = DB.RetriveData.AccessSequenceData(key)
+    locals().update(sequenceInfo)
+
+    return(gene_length)
+    return(CDS_join)
+
+    
+
+    #processing data with functions create in business_logic_layer.py 
 
     parsedSequence = BL.ParseSequence(new)
     codingRegion = BL.codingRegion(start,end,parsedSequence)
