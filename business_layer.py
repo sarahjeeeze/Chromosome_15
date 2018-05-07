@@ -268,8 +268,8 @@ def codonFreq(nuc_sequence):
                 codonfrequency[codon] = 1
         for i in codons:
             if i not in codonfrequency:
-                freq[i] = 0
-    return (freq) 
+                codonfrequency[i] = 0
+    return (codonfrequency) 
 
 
 def totalCodonFreq(seq):
