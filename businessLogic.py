@@ -30,14 +30,12 @@ V2.0 17.04.2018     Re-Work 	BY:Sarah Griffiths
 v2.1 03.05.2018	    Fixed a bug	BY: Sarah Griffiths
 v2.2 07.05.2018	    removed data access BY: SG
 """
-#***********************************************************
-#import libraries
-#from urllib import request
+
 import sys
 import re
-#import archanapymsql
 
-#************************************************************              
+
+        
 
 
 def ParseSequence(origin):
