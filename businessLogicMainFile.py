@@ -26,13 +26,14 @@ Chromosome15_gene_browser
 -----------------------------------------------------------------
 Revision History:
 =================
-V1.0 17.04.2018     Original    BY: Sarah Griffiths
-v2.0 28.04.2018     Original    BY: Sarah Griffiths
+V1.0 17.04.2018     Original    BY: SG
+v2.0 28.04.2018     Original    BY: SG
 v3.0 07.05.2018     Include data access layers BY:SG
+v3.1 08.05.2018     final edits BY: SG
 """
 
 import Chrom_CDS_15 Access Layer as DB
-import businessLocic as BL
+import businessLogic as BL
 
 def getAllGenes():
     """ accesses DB and returns list of all genes A-Z """
@@ -73,7 +74,7 @@ def getAllEntryData(key):
     return(NCBI_identifier)
     return (chromosome_location)
     return (protein_product_name)
-    
+    # access sequence DB layer and return variables
     sequenceInfo = DB.RetriveData.AccessSequenceData(key)
     locals().update(sequenceInfo)
 
@@ -93,6 +94,8 @@ def getAllEntryData(key):
     codonFrequency = BL.codonFreq(splitSequence)# need to edit to incorporate total frequencies
                      
  def restrictionEnzymeCutSites(bases):
+    """ input: bases of cut site eg. tcgaa
+        return: dictionary of sequence start and end sites and indication of whether or not in coding region """
     dictionary = DB.RetriveData.AccessRestriction_enzymeInfo(name)
     locals().update(dictionary)
     cutSite = cut_site
