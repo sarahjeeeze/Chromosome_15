@@ -2,7 +2,7 @@
 
 """
 Program:        chromosome15_gene_browser
-File:           business_logic_main_file.py
+File:           businessLogicMainFile.py
 Version:        V1.0
 Date:           17.04.2018
 Function:       Provide a simple file for a front end to work with. See business_logic.py file
