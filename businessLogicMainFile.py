@@ -78,11 +78,11 @@ def getAllEntryData(key):
     locals().update(sequenceInfo)
 
     return(gene_length)
-    return(CDS_join)
+    return(CDS_join) # parse in to start and end positions somehow? 
+    return(sequence)
 
-    
-
-    #processing data with functions create in business_logic_layer.py 
+   
+    #processing data with functions created in businessLogic.py - all of them contain 'return' statements so none required here.
 
     parsedSequence = BL.ParseSequence(sequence)
     codingRegion = BL.codingRegion(start,end,parsedSequence)
@@ -91,5 +91,11 @@ def getAllEntryData(key):
     translatedAndAligned = BL.alignseq(splitSequence)
     justAminoAcids = BL.translatedSequence(splitSequence)#check this
     codonFrequency = BL.codonFreq(splitSequence)# need to edit to incorporate total frequencies
-    restrictionEnzymeCutSites = BL.restrictionEnzyme('ttgtc', start, end, parsedSequence) #returned as dictionary
+                     
+ def restrictionEnzymeCutSites(bases):
+    dictionary = DB.RetriveData.AccessRestriction_enzymeInfo(name)
+    locals().update(dictionary)
+    cutSite = cut_site
+    cutSiteLocations = BL.restrictionEnzyme(cut_site, start, end, parsedSequence) 
+    return (cutSiteLocations) #returned as dictionary
 
