@@ -3,10 +3,10 @@
 
 """
 Program:        chromosome15_gene_browser
-File:           buseinss_layer.py
+File:           buseinssLogic.py
 Version:        V2.1
 Date:           03.05.2018
-Function:       Obtain data from Chromosome15 DB, process and return output in JSON format.
+Function:       Process chromosome data and return output
 Copyright:                  Sarah Griffiths
 Author:                     Sarah Griffiths
 project_collaborators:      Archana Patil, Sergio Ramalli, Fabio Biond
