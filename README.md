@@ -1,7 +1,7 @@
 # Chromosome_15 - Middle Layer - Sarah Griffiths
 
 
-To run with dummy code save all of these files in 1 folder.
+<b>To run with dummy code save all of these files in 1 folder.</b>
 
 businessLogic.py,
 dummyDataOutput.py,
@@ -14,7 +14,7 @@ run.
 This will return variables with required names - 
 To test this you can print the variables. 
 
-To run with Data layer
+<b>To run with Data layer</b>
 
 save these files in 1 folder with DB access layers
 
