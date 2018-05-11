@@ -1,0 +1,15 @@
+"""function ammended to work with CDS join instead of start and end sequences """
+
+ex1 = '2394..3680'
+
+ex2 = '704..706,1963..2134,2328..2434,2742..2880,3580..3704,3988..4117,4387..4543,5116..5199,5316..5436,5841..6086'
+
+
+import re
+p = re.compile(r'(\d+).+\.(\d+)')
+match = p.search(ex1)
+
+start = match.group(1)
+end = match.group(2)
+
+
