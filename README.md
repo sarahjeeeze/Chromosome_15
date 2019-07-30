@@ -24,4 +24,4 @@ businessLogicMainFile.py
 See user guide for functions
 
 
-Do not use - test.py - these are for testing database data.
+Do not use - test.py 
